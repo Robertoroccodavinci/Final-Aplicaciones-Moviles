@@ -20,6 +20,7 @@
     "expo-auth-session": "~3.4.2",
     "expo-random": "~12.0.1",
     "expo-status-bar": "~1.1.0",
+    "formlink": "^1.0.3",
     "globally": "^0.0.0",
     "react": "17.0.1",
     "react-dom": "17.0.1",
@@ -28,7 +29,8 @@
     "react-native-reanimated": "~2.2.0",
     "react-native-safe-area-context": "3.3.2",
     "react-native-screens": "~3.8.0",
-    "react-native-web": "0.17.1"
+    "react-native-web": "0.17.1",
+    "react-native-web-webview": "^1.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"
