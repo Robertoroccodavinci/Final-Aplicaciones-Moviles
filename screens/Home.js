@@ -11,10 +11,13 @@ export default function Home({ navigation }) {
         <Text> 
             Bienvenido a la APP, Home
         </Text>
+        <Text> 
+            Busca el Pais, Ciudad, o latitud y longitud del lugar donde quieras saber el clima.
+        </Text>
         
-        <TouchableOpacity style={ styles.btns } 
+        <TouchableOpacity 
                           onPress={() => navigation.navigate("Home")}>
-              <Text style={ styles.btnsTxt } >Iniciar Sessión</Text>
+              <Text  >Iniciar Sessión</Text>
         </TouchableOpacity>
 
     </View>

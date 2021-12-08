@@ -8,7 +8,7 @@ import { createStackNavigator } from '@react-navigation/stack'
 const Stack = createStackNavigator();
 
 import Login from './screens/Login';
-import Home from './screens/Home';
+import DrawerHome from './navigators/DrawerHome';
 
 export default function App() {
 
@@ -24,7 +24,7 @@ export default function App() {
         />
 
         
-        <Stack.Screen name="Home" component={Home} options={{  headerShown: false }} />
+        <Stack.Screen name="DrawerHome" component={DrawerHome} options={{  headerShown: false }} />
         
         
       </Stack.Navigator>

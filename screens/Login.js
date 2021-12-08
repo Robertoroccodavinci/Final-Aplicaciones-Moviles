@@ -13,7 +13,7 @@ export default function Login({ navigation }) {
   
     React.useEffect(() => {
       if (response?.type === 'success') {
-          navigation.navigate("Home", {auth: response.authentication})
+          navigation.navigate("DrawerHome", {auth: response.authentication})
         }
     }, [response]);
 
@@ -24,9 +24,9 @@ export default function Login({ navigation }) {
         <Text> 
             Bienvenido a la APP, inicie sesion
         </Text>
-        <TouchableOpacity style={ styles.btns } 
-                          onPress={() => navigation.navigate("Home")}>
-              <Text style={ styles.btnsTxt } >Iniciar Sessión</Text>
+        <TouchableOpacity 
+                          onPress={() => navigation.navigate("DrawerHome")}>
+              <Text  >Iniciar Sessión</Text>
         </TouchableOpacity>
 
     </View>
