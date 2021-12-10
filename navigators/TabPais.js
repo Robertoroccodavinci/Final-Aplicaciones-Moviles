@@ -7,24 +7,20 @@ import { createBottomTabNavigator  } from '@react-navigation/bottom-tabs'
 
 const Tabs = createBottomTabNavigator();
 
-import Home from './screens/Home';
+import Pais from '../screens/Pais';
 
-export default function App() {
+export default function TabPais({route, navigation}) {
 
   return (
 
-    <NavigationContainer>
-
       <Tabs.Navigator  initialRouteName="Pais"
       >
-        <Tabs.Screen name="Pais" component={Pais} options={{  headerShown: false }} />
+        <Tabs.Screen name="Pais" component={Pais} options={{  headerShown: false }} initialParams={{ pais: route.params.pais}} />
 
         {/* <Tabs.Screen name="Clima" component={Clima} options={{  headerShown: false }} /> */}
         
-        
       </Tabs.Navigator>
 
-    </NavigationContainer>
   );
 
 }

@@ -1,25 +1,22 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, TextInput, Text, View,TouchableOpacity } from 'react-native';
+import { StyleSheet, TextInput, Text, View,TouchableOpacity,ScrollView } from 'react-native';
+import { Avatar, Button, Card, Title, Paragraph } from 'react-native-paper';
 
-export default function Home({ navigation }) {
+export default function Home({ route, navigation }) {
 
   return (
    
     <View style = {styles.container}>
-        <Text style={ styles.titulo }> 
-            Bienvenido a la APi Paises
-        </Text>
+      <ScrollView>
+      <Text style={ styles.titulo }> 
+          Bienvenido a la APi Paises
+      </Text>
 
-      <Text style={ styles.texto }> 
-        Busca el Pais, Ciudad, o latitud y longitud del lugar donde quieras saber el clima.
-      </Text> 
-        <TextInput style = {styles.searchBar} placeholder = "Ingrese el Pais" onChangeText = {text => setText(text)}/>
-        <TouchableOpacity style={ styles.btns }
-                          onPress={() => navigation.navigate("Home")}>
-              <Text  style={ styles.btnsTxt }>Buscar</Text>
-        </TouchableOpacity>
+     
+      <TextInput style = {styles.searchBar} placeholder = "Ingrese el Pais" onChangeText = {text => setText(text)}/>
 
+    </ScrollView>
     </View>
   
   );

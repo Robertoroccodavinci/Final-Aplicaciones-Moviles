@@ -9,6 +9,8 @@ const Stack = createStackNavigator();
 
 import Login from './screens/Login';
 import DrawerHome from './navigators/DrawerHome';
+import TabPais from './navigators/TabPais';
+
 
 export default function App() {
 
@@ -16,16 +18,13 @@ export default function App() {
 
     <NavigationContainer>
 
-      <Stack.Navigator  initialRouteName="Login"
-      >
+      <Stack.Navigator  initialRouteName="Login">
 
-        <Stack.Screen  name="Login"  component={Login} 
-                       options={{  headerShown: false  }} 
-        />
-
+        <Stack.Screen  name="Login"  component={Login} options={{  headerShown: false  }} />
         
         <Stack.Screen name="DrawerHome" component={DrawerHome} options={{  headerShown: false }} />
         
+        <Stack.Screen name="TabPais" component={TabPais} options={{  headerShown: false }} />
         
       </Stack.Navigator>
 

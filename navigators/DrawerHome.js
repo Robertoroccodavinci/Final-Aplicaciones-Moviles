@@ -8,57 +8,34 @@ const Drawer = createDrawerNavigator();
 
 import Home from '../screens/Home';
 import Contacto from '../screens/Contacto';
+import ListaPaises from '../screens/ListaPaises';
 
 import CustomSidebarMenu from '../CustomSidebarMenu';
+import { set } from 'react-native-reanimated';
 
-export default function DrawerHome() {
+export default function DrawerHome({route, navigation}) {
   
-  const [paises, setPaises] = React.useState([]);
-  const [estado, setEstado] = React.useState(0);
+
   
-  React.useEffect(() => {
-
-    fetch('https://restcountries.com/v3.1/all')
-    .then( (response) => { response.json, this.setEstado(response.status) })
-    .then( (data) => this.setPaises(data));
-/*     let results = data.results;
-    let paises = [];
-    paises = results.map((element) => {
-      return fetch(element.url)
-        .then((response) => response.json())
-    })
-      return Promise.all(paises);
-
-    .then((data) => setData(data))
-    .catch(function (error){
-        console.log(error);
-    }); */
-    
-  }, []);
+  
   
   return (
 
-    
+    <Drawer.Navigator initialRouteName="Home"
+                      drawerContent={(props) => <CustomSidebarMenu {...props} />} >
 
-      <Drawer.Navigator  initialRouteName="Home"
-      drawerContent={(props) => <CustomSidebarMenu {...props} />}
-      >
+      <Drawer.Screen  name="Home"   component={Home}
+                      initialParams={{lista: route.params.datos}} />
 
-        <Drawer.Screen  name="Home"   component={Home}
-                        /* options={{  headerShown: false }}   */
-        />
-        <Drawer.Screen  name="Contacto"   component={Contacto}
-                        /* options={{  headerShown: false }}   */
-        />
-                
+      <Drawer.Screen  name="ListaPaises"   component={ListaPaises} 
+                      initialParams={{lista: route.params.datos}} />
 
-        
-       {/* <Drawer.Screen name="Listado Paises" component={ListadoPaises} options={{  headerShown: false }} /> */}
-        
-        
-      </Drawer.Navigator>
-
-    
+      <Drawer.Screen  name="Contacto"   component={Contacto} />
+      
+      {/* <Drawer.Screen name="Listado Paises" component={ListadoPaises} options={{  headerShown: false }} /> */}
+      
+    </Drawer.Navigator>
+  
   );
 
 }
