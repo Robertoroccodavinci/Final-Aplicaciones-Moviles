@@ -12,8 +12,8 @@ export default function Login({ navigation }) {
   const [estado, setEstado] = React.useState(0);
 
   const fetchLista = () =>{
-    fetch("https://restcountries.com/v3.1/subregion/south america")
-    /* fetch("https://restcountries.com/v3.1/all") */
+    /* fetch("https://restcountries.com/v3.1/subregion/south america") */
+    fetch("https://restcountries.com/v3.1/all") 
     .then( response =>  response.json() )
     .then( data => { setPaises(data) })
   }
@@ -30,10 +30,6 @@ export default function Login({ navigation }) {
           navigation.navigate("DrawerHome", {datos: paises, auth: response.authentication})
         }
     }, [response]);
-
-   
-    
-   
     
   return (
    

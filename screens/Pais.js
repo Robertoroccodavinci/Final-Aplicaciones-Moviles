@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View,TouchableOpacity, Image, ScrollView } from 'react-native';
-
+import {Card} from 'react-native-paper';
 
 export default function Pais({ route, navigation }) {
     
@@ -18,31 +18,29 @@ export default function Pais({ route, navigation }) {
     <View style = {styles.container}>  
       <StatusBar hidden/>
     
-        <Text style = {styles.titulo}> {pais.name.common+pais.flag} </Text>
-        <Text style = {styles.texto}> {pais.name.official} </Text>
-        <Text style = {styles.texto}> Capital: {pais.capital} </Text>
-        <Text style = {styles.texto}> Region: {pais.region} </Text>
-        <Text style = {styles.texto}> Subregion: {pais.subregion} </Text>
-        <Text style = {styles.texto}> Continente: {pais.continents} </Text>
-        <Text style = {styles.texto}> Moneda: {pais.currencies.toString()} </Text>
-        <Text style = {styles.texto}> Idioma: {pais.languages.toString()} </Text>
+        <Text style = {styles.titulo}> {pais.translations.spa.common+pais.flag} </Text>
         
-        <Text style = {styles.texto}> Latitud Longitud(latlng): {pais.latlng} </Text>
-        <Text style = {styles.texto}> Poblacion: {pais.population} </Text>
-        <Text style = {styles.texto}> Zona Horaria: {pais.timezones} </Text>
+        <Image resizeMode={'contain'} style = {{ width:200, height:150, marginBottom:6}} 
+                source={{uri: pais.flags.png}}/>  
+
+        <Text style = {styles.texto}> {pais.translations.spa.official} </Text>
+        <Text style = {styles.texto}> Capital:  {pais.capital} </Text>
+        <Text style = {styles.texto}> Region:  {pais.region} </Text>
+        <Text style = {styles.texto}> Subregion:  {pais.subregion} </Text>
+        <Text style = {styles.texto}> Continente:  {pais.continents} </Text>
+        <Text style = {styles.texto}> Moneda:  {pais.currencies[0]} </Text>
+        
+        <Text style = {styles.texto}> Idioma:  {pais.languages[0]} </Text>
+        
+        <Text style = {styles.texto}> Latitud Longitud(latlng):  {pais.latlng[0]+", "+pais.latlng[1]} </Text>
+        <Text style = {styles.texto}> Poblacion:  {pais.population} </Text>
+        <Text style = {styles.texto}> Zona Horaria:  {pais.timezones} </Text>
      
-
-        <Image resizeMethod={"scale"} resizeMode={'contain'} style = {{ width:'auto', height:150, marginBottom:6}} 
-               source={{uri: pais.flags.png}}/>  
-
-        <Image resizeMethod={"scale"} resizeMode={'contain'} style = {{ width:'auto', height:150, marginBottom:6}} 
+        <Image resizeMode={'contain'} style = {{ width:200, height:150, marginBottom:6}} 
                source={{uri: pais.coatOfArms.png}}/>  
         
-
         <TouchableOpacity style={ styles.btns }
-                          onPress={() => /* {promptAsync();} */
-                          navigation.navigate("DrawerHome")
-                          }>
+                          onPress={() => navigation.navigate("Home") }>
             
         </TouchableOpacity>
     </View>
@@ -55,11 +53,11 @@ export default function Pais({ route, navigation }) {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#fff',
+    
+    backgroundColor: 'lightgrey',
     alignItems: 'center',
     justifyContent: 'center', 
-    paddingTop:20  
+    paddingVertical:20  
   },
   titulo: {
     fontSize: 30,

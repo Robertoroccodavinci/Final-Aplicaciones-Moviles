@@ -6,13 +6,10 @@ import { Avatar, Button, Card, Title, Paragraph } from 'react-native-paper';
 
 export default function ListaPaises({ route,navigation }) {
   
-  const[paises,setPaises]= React.useState([])
-  
-  React.useEffect(() => {
-    setPaises(route.params.lista);
-  
-  },[]);
+  const[paises,setPaises]= React.useState(route.params.lista);
 
+  var count = 0;
+  const[maxCount,setMaxCount] = React.useState(10);
 
   return (
    
@@ -23,13 +20,14 @@ export default function ListaPaises({ route,navigation }) {
         <Text style = {styles.titulo}> Lista de Paises </Text>
 
         {paises.map( element => {
+          
+          if(count!== maxCount){
+            return(count++,
+              
+              <Card key={count} style={{borderWidth:1, marginVertical:3}} >
 
-          return(
-      
-              <Card key={element.ccn3} style={{borderWidth:1, marginVertical:3}} >
-
-                <Card.Title title={element.name.common+" "+element.flag} 
-                            subtitle={element.name.official} />
+                <Card.Title title={element.translations.spa.common+" "+element.flag} 
+                            subtitle={element.translations.spa.official} />
                 {/*   <Card.Content>
                   <Title>{element["name"]["common"]}</Title>
                 </Card.Content> */}
@@ -41,9 +39,15 @@ export default function ListaPaises({ route,navigation }) {
                 </Card.Actions>
               </Card>
             
-          )
+            )
           
+          }
+            
         })}    
+      
+        <TouchableOpacity style={ styles.btns } onPress={() => { setMaxCount(maxCount+10) } }>
+          <Text  style={ styles.btnsTxt }>Mostrar más</Text>
+        </TouchableOpacity>
 
       </ScrollView>
 
@@ -76,9 +80,9 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     backgroundColor: "#ffcd00",
     borderRadius: 6,
-    height: "5%",
     width: "60%",
     marginHorizontal: "25%",
+    marginVertical:5,
   },
   btnsTxt: {
     textAlign: "center",
