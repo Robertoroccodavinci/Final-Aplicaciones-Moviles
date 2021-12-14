@@ -34,7 +34,7 @@ export default function Pais({ route, navigation }) {
         
         <Text style = {styles.texto}> Latitud Longitud(latlng):  {pais.latlng[0]+", "+pais.latlng[1]} </Text>
         <Text style = {styles.texto}> Poblacion:  {pais.population} </Text>
-        <Text style = {styles.texto}> Zona Horaria:  {pais.timezones} </Text>
+        <Text style = {styles.texto}> Zona Horaria:  {pais.timezones.map(element => {return element+", "})} </Text>
      
         <Image resizeMode={'contain'} style = {{ width:200, height:150, marginBottom:6}} 
                source={{uri: pais.coatOfArms.png}}/>  

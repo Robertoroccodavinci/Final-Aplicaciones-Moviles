@@ -21,13 +21,13 @@ export default function DrawerHome({route, navigation}) {
   
   return (
 
-    <Drawer.Navigator initialRouteName="Home"
+    <Drawer.Navigator initialRouteName="Home"    
                       drawerContent={(props) => <CustomSidebarMenu {...props} />} >
 
       <Drawer.Screen  name="Home"   component={Home}
                       initialParams={{lista: route.params.datos}} />
 
-      <Drawer.Screen  name="ListaPaises"   component={ListaPaises} 
+      <Drawer.Screen  name="ListaPaises" component={ListaPaises} 
                       initialParams={{lista: route.params.datos}} />
 
       <Drawer.Screen  name="Contacto"   component={Contacto} />

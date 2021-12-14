@@ -1,10 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View,TouchableOpacity, ScrollView } from 'react-native';
+import { StyleSheet, Text, View,TouchableOpacity, ScrollView,Image } from 'react-native';
 import { Avatar, Button, Card, Title, Paragraph } from 'react-native-paper';
 
 
-export default function ListaPaises({ route,navigation }) {
+export default function ListaPaises({ route, navigation }) {
   
   const[paises,setPaises]= React.useState(route.params.lista);
 
@@ -13,67 +13,66 @@ export default function ListaPaises({ route,navigation }) {
 
   return (
    
-    <View style = {styles.container}>
-      
-      <ScrollView >
-        
-        <Text style = {styles.titulo}> Lista de Paises </Text>
-
-        {paises.map( element => {
+    <View>
+<ScrollView>
+<View style={[styles.parent]}>
+      {paises.map( element => {
           
           if(count!== maxCount){
             return(count++,
-              
-              <Card key={count} style={{borderWidth:1, marginVertical:3}} >
+              <View key={count} style={[styles.child]}>
+                <TouchableOpacity   onPress={() => navigation.navigate("TabPais",{pais: element})}>
+                  <Card  style={{ marginVertical:3, alignItems:'center',elevation:5, backgroundColor:'black'}} >
 
-                <Card.Title title={element.translations.spa.common+" "+element.flag} 
-                            subtitle={element.translations.spa.official} />
-                {/*   <Card.Content>
-                  <Title>{element["name"]["common"]}</Title>
-                </Card.Content> */}
-                {/* <Card.Cover source={{ uri: 'https://picsum.photos/700' }} /> */}
-                <Card.Actions>
-                  <TouchableOpacity onPress={() => navigation.navigate("TabPais",{pais: element})}>
-                    <Text>ir a pais</Text>
-                  </TouchableOpacity>
-                </Card.Actions>
-              </Card>
-            
+                  <Image resizeMode={'contain'} 
+                         style = {{ alignSelf:'center', width:150, height:100,marginTop:5, marginBottom:2,borderColor:'white',
+                         borderWidth:1}} 
+                         
+                         source={{uri: element.flags.png}}/>  
+                    <Card.Content>
+                      <Text style={ styles.texto }><Text style={{fontWeight:'bold', color:'red'}}>Pais: </Text> {element.translations.spa.common}</Text>
+                      <Text style={ styles.texto }><Text style={{fontWeight:'bold', color:'red'}}>Capital:</Text> {element.capital}</Text>
+                      
+                    </Card.Content> 
+                    {/* <Card.Cover source={{ uri: 'https://picsum.photos/700' }} /> */}
+                  </Card>
+                </TouchableOpacity>
+              </View>    
             )
           
           }
             
         })}    
-      
-        <TouchableOpacity style={ styles.btns } onPress={() => { setMaxCount(maxCount+10) } }>
-          <Text  style={ styles.btnsTxt }>Mostrar más</Text>
-        </TouchableOpacity>
+</View>
 
-      </ScrollView>
-
+<View style={[styles.parent]}>
+    <TouchableOpacity  onPress={() => { setMaxCount(maxCount+10) } }>
+        <Text style={styles.texto}  >Mostrar más</Text>
+      </TouchableOpacity>
+</View>
+</ScrollView>
     </View>
-  
+
   );
-
 }
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',   
+    justifyContent:'center',
+   
   },
   titulo: {
-    fontSize: 30,
+    fontSize: 25,
     fontWeight: 'bold',
-    color: 'red'
+    color: 'red',
+    alignSelf:'center'
   },
   texto: {
-    fontSize: 20,
+    fontSize: 15,
+    color:'white',
     textAlign: "left",
-    marginBottom: 20,
-    marginHorizontal: 20
+    marginVertical:2
 
   },
   btns: {
@@ -90,5 +89,20 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: 'bold',        
   },
+  parent: {
+    width: '100%', 
+    flexDirection: 'row', 
+    flexWrap: 'wrap',
+    backgroundColor:'black'
+  },
+  child: {
+    width: '45%', 
+    margin: '2%', 
+    aspectRatio: 1,
+    borderColor:'white',
+    borderWidth:2,
+  },    
+    
+
 });
 

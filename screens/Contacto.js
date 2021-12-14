@@ -55,10 +55,6 @@ export default function Contacto({ navigation }) {
         <Text style={ styles.titulo }> 
             Contactanos
         </Text>    
-        <TextInput style={ styles.textBox } placeholder = "Ingrese su Nombre" onChangeText = {text => setText(text)}/>
-        <TextInput style={ styles.textBox } placeholder = "Ingrese su Email" onChangeText = {text => setText(text)}/>
-        <TextInput style={ styles.textBox } placeholder = "Ingrese su Celular" onChangeText = {text => setText(text)}/>
-        <TextInput style={ styles.TextArea } placeholder = "Comentario" onChangeText = {text => setText(text)}/>
         
         <TouchableOpacity style={ styles.btns }
                           onPress={() => navigation.navigate("Home")}>
@@ -81,14 +77,14 @@ const styles = StyleSheet.create({
 
   },
   titulo: {
-    fontSize: 30,
+    fontSize: 20,
     fontWeight: 'bold',
     color: 'red'
 
 
   },
   texto: {
-    fontSize: 20,
+    fontSize: 17,
     textAlign: "left",
     marginBottom: 20,
     marginHorizontal: 20

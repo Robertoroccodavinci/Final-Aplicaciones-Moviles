@@ -8,12 +8,13 @@ export default function Home({ route, navigation }) {
   const[paises,setPaises] = React.useState(route.params.lista);
   const[search, setSearch] = React.useState("");
   const[results, setResults] = React.useState([]);
+  const[datos, setDatos] = React.useState([]);
   
   var count = 0;
   
   const[maxCount,setMaxCount] = React.useState(10);
 
-
+  
   React.useEffect(() => {
     count = 0;
     setMaxCount(10);
@@ -30,35 +31,34 @@ export default function Home({ route, navigation }) {
         
         <TextInput style = {styles.searchBar} placeholder = "Ingrese el Pais" onChangeText={text => setSearch(text)} />
 
-        {(search === '')? <Text>Busca el pais, ciudad que estas buscando</Text>
+        {(search === '')? <Text>Busca el pais que estas buscando</Text>
         :paises.map(element =>{
           
-          if(count!== maxCount&&element.translations.spa.common.toLowerCase().includes(search.toLocaleLowerCase())){
+          if(count!== maxCount && element.translations.spa.common.toLowerCase().includes(search.toLocaleLowerCase())){
 
            return( count++ ,
-            <Card key={count} style={{borderWidth:1, marginVertical:3}} >
+            <TouchableOpacity key={count} onPress={() => navigation.navigate("TabPais",{pais: element})}>
+            <Card  style={{borderWidth:1, marginVertical:3}} >
 
               <Card.Title title = { element.translations.spa.common+" "+element.flag } 
                           subtitle = { element.translations.spa.official } />
               
               <Card.Actions>
-                <TouchableOpacity onPress={() => navigation.navigate("TabPais",{pais: element})}>
-                  <Text>ir a pais</Text>
-                </TouchableOpacity>
+                
               </Card.Actions>
 
             </Card>
-           
+            </TouchableOpacity>
            )
           }
          
 
         })}
-        {(search !== '')? 
-          <TouchableOpacity style={ styles.btns } onPress={() => { setMaxCount(maxCount+10) } }>
-            <Text  style={ styles.btnsTxt }>Mostrar más</Text>
-          </TouchableOpacity>
-        : <Text  style={ styles.btnsTxt }></Text> }
+        {( search !== '' && paises[count+1] === null)? 
+         <Text style={ styles.texto }> No hay mas resultados para su busqueda </Text>
+         :  <TouchableOpacity style={ styles.btns } onPress={() => { setMaxCount(maxCount+10) } }>
+              <Text  style={ styles.btnsTxt }>Mostrar más</Text>
+            </TouchableOpacity> }
         
 
       </ScrollView>
