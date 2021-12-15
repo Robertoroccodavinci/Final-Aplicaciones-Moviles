@@ -40,7 +40,7 @@ export default function Login({ navigation }) {
     <View style = {styles.container}>
       <StatusBar hidden />
         <Text style = {styles.titulo}> 
-            Bienvenido a nuestro Proyecto
+            Bienvenido a nuestro Proyecto 
         </Text>
         <Text style={ styles.texto }> 
           Necesitas iniciar sesión para poder acceder a la App.
@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
   titulo: {
     fontSize: 30,
     fontWeight: 'bold',
-    color: 'red'
+    color: 'black'
   },
   texto: {
     fontSize: 20,
@@ -79,11 +79,12 @@ const styles = StyleSheet.create({
   },
   btns: {
     justifyContent: "center",
-    backgroundColor: "#f9a825",
+    backgroundColor: "#ffcd00",
     borderRadius: 6,
-    height: "5%",
     width: "60%",
-    marginHorizontal: "25%",
+    marginHorizontal: "20%",
+    padding:10,
+    elevation:5
   },
   btnsTxt: {
     textAlign: "center",

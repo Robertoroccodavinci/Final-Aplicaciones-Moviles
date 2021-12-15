@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
-
+import {Ionicons, MaterialIcons} from '@expo/vector-icons';
 import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList, DrawerItem } from '@react-navigation/drawer';
 
 const Drawer = createDrawerNavigator();
@@ -41,23 +41,37 @@ export default function DrawerHome({route, navigation}) {
                        /* drawerContent={(props) => <Menu {...props} />}  > */
                        drawerContent={(props) => <Menu navigation = {navigation} name = {userInfo} img = {imgUser} props = {props} {...props} />}  
                        screenOptions={{
-                        drawerStyle: {
-                          backgroundColor: '#b3e5fb',
-                          
-                          
+                          drawerStyle: {
+                            backgroundColor: '#b3e5fb',
+                            
                         },
-                        
+                        drawerLabelStyle:{
+                          fontWeight:'bold'
+                        },
                         drawerActiveBackgroundColor: '#fbc02d',
-                        drawerActiveTintColor:'black'
+                        drawerActiveTintColor:'black',
+                        drawerInactiveTintColor:'grey',
+                        headerStyle:{
+                          backgroundColor:'#03a9f4'
+                        }
                         }}
                        >
       <Drawer.Screen  name="Home"   component={Home}
+                      options={{   title:'Inicio',
+                      drawerIcon: ({focused, size}) => (
+                                <Ionicons name="home" size={size} color={focused ? 'black' : 'grey'}/> ), }}
                       initialParams={{lista: route.params.datos}} />
 
       <Drawer.Screen  name="ListaPaises" component={ListaPaises} 
+                      options={{   title:'Listado de Paises',
+                      drawerIcon: ({focused, size}) => (
+                                <Ionicons name="list-sharp" size={size} color={focused ? 'black' : 'grey'}/> ), }}
                       initialParams={{lista: route.params.datos}} />
 
-      <Drawer.Screen  name="Contacto"   component={Contacto} />
+      <Drawer.Screen  name="Contacto"   component={Contacto} 
+                      options={{   title:'Contacto',
+                      drawerIcon: ({focused, size}) => (
+                                  <MaterialIcons name="contact-page" size={size} color={focused ? 'black' : 'grey'}/> ), }} />
       
     </Drawer.Navigator>
     
@@ -66,13 +80,20 @@ export default function DrawerHome({route, navigation}) {
 
 const Menu = ({navigation, name, img, props}) => {
   return(
-      <DrawerContentScrollView>
+      <DrawerContentScrollView >
         <View style = {styles.info}>
-          <Image style = {styles.imgUser} source={{uri: img}} />
+           
+           {/* REVISAR ERROR */}
+           <Image style = {styles.imgUser} source={{uri: img}} /> 
+
           <Text> {name}</Text>
         </View>
         <DrawerItemList style = {styles.items} {...props} />
-        <DrawerItem label = "Logout" onPress = { () => {navigation.navigate("Login")}} />
+        <DrawerItem label = "Salir" onPress = { () => {navigation.navigate("Login")}} 
+                    icon={ ({focused, size}) => (
+                        <MaterialIcons name="logout" size={size} color={focused ? 'black' : 'grey'}/> )}
+                     />
+
         <Text style = {styles.about}> Proyecto Final App Moviles </Text>
       </DrawerContentScrollView>
   )
@@ -94,10 +115,13 @@ const styles = StyleSheet.create({
     color: 'black',
   },
   about:{
-    bottom: 20,
+    
     textAlign: 'center',
     color: 'grey',
-    marginTop: 450,
+    flexDirection:'column',
+    paddingHorizontal:30,
+    paddingVertical:50,
+    
   }
 });
 

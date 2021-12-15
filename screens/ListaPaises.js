@@ -18,24 +18,21 @@ export default function ListaPaises({ route, navigation }) {
 <View style={[styles.parent]}>
       {paises.map( element => {
           
-          if(count!== maxCount){
+          if(count!== maxCount&& element.capital){
             return(count++,
               <View key={count} style={[styles.child]}>
                 <TouchableOpacity   onPress={() => navigation.navigate("TabPais",{pais: element})}>
-                  <Card  style={{ marginVertical:3, alignItems:'center',elevation:5, backgroundColor:'black'}} >
+
 
                   <Image resizeMode={'contain'} 
                          style = {{ alignSelf:'center', width:150, height:100,marginTop:5, marginBottom:2,borderColor:'white',
                          borderWidth:1}} 
                          
                          source={{uri: element.flags.png}}/>  
-                    <Card.Content>
-                      <Text style={ styles.texto }><Text style={{fontWeight:'bold', color:'red'}}>Pais: </Text> {element.translations.spa.common}</Text>
-                      <Text style={ styles.texto }><Text style={{fontWeight:'bold', color:'red'}}>Capital:</Text> {element.capital}</Text>
-                      
-                    </Card.Content> 
-                    {/* <Card.Cover source={{ uri: 'https://picsum.photos/700' }} /> */}
-                  </Card>
+
+                      <Text style={ styles.texto }> {element.translations.spa.common}</Text>
+                      <Text style={ styles.texto }> ({element.capital})</Text>
+
                 </TouchableOpacity>
               </View>    
             )
@@ -43,13 +40,12 @@ export default function ListaPaises({ route, navigation }) {
           }
             
         })}    
+
+  <TouchableOpacity style={ styles.btns } onPress={() => { setMaxCount(maxCount+10) } }>
+              <Text  style={ styles.btnsTxt }>Mostrar más</Text>
+  </TouchableOpacity> 
 </View>
 
-<View style={[styles.parent]}>
-    <TouchableOpacity  onPress={() => { setMaxCount(maxCount+10) } }>
-        <Text style={styles.texto}  >Mostrar más</Text>
-      </TouchableOpacity>
-</View>
 </ScrollView>
     </View>
 
@@ -58,7 +54,7 @@ export default function ListaPaises({ route, navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#becfd7',
     justifyContent:'center',
    
   },
@@ -70,8 +66,9 @@ const styles = StyleSheet.create({
   },
   texto: {
     fontSize: 15,
-    color:'white',
-    textAlign: "left",
+    fontWeight:'bold',
+    color:'black',
+    textAlign: "center",
     marginVertical:2
 
   },
@@ -80,8 +77,10 @@ const styles = StyleSheet.create({
     backgroundColor: "#ffcd00",
     borderRadius: 6,
     width: "60%",
-    marginHorizontal: "25%",
-    marginVertical:5,
+    marginHorizontal: "20%",
+    marginVertical:10,
+    padding:10,
+    elevation:5
   },
   btnsTxt: {
     textAlign: "center",
@@ -93,14 +92,12 @@ const styles = StyleSheet.create({
     width: '100%', 
     flexDirection: 'row', 
     flexWrap: 'wrap',
-    backgroundColor:'black'
+    backgroundColor:'#becfd7'
   },
   child: {
     width: '45%', 
     margin: '2%', 
     aspectRatio: 1,
-    borderColor:'white',
-    borderWidth:2,
   },    
     
 
