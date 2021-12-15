@@ -32,6 +32,7 @@ export default function ListaPaises({ route, navigation }) {
 
                       <Text style={ styles.texto }> {element.translations.spa.common}</Text>
                       <Text style={ styles.texto }> ({element.capital})</Text>
+                      <Text style={ styles.texto }> [{element.continents}]</Text>
 
                 </TouchableOpacity>
               </View>    
@@ -55,8 +56,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#becfd7',
-    justifyContent:'center',
-   
+    justifyContent:'center',   
   },
   titulo: {
     fontSize: 25,

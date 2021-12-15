@@ -61,9 +61,9 @@ export default function Login({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#ccedfc',
+    backgroundColor: '#becfd7',
     alignItems: 'center',
-    justifyContent: 'center',   
+    justifyContent: 'center',  
   },
   titulo: {
     fontSize: 30,

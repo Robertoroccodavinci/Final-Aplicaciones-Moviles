@@ -13,38 +13,77 @@ export default function Pais({ route, navigation }) {
 
   return (
    
-    <View >
-    <ScrollView>    
-    <View style = {styles.container}>  
-      <StatusBar hidden/>
-    
-        <Text style = {styles.titulo}> {pais.translations.spa.common+pais.flag} </Text>
-        
-        <Image resizeMode={'contain'} style = {{ width:200, height:150, marginBottom:6}} 
-                source={{uri: pais.flags.png}}/>  
-
-        <Text style = {styles.texto}> {pais.translations.spa.official} </Text>
-        <Text style = {styles.texto}> Capital:  {pais.capital} </Text>
-        <Text style = {styles.texto}> Region:  {pais.region} </Text>
-        <Text style = {styles.texto}> Subregion:  {pais.subregion} </Text>
-        <Text style = {styles.texto}> Continente:  {pais.continents} </Text>
-        <Text style = {styles.texto}> Moneda:  {pais.currencies[0]} </Text>
-        
-        <Text style = {styles.texto}> Idioma:  {pais.languages[0]} </Text>
-        
-        <Text style = {styles.texto}> Latitud Longitud(latlng):  {pais.latlng[0]+", "+pais.latlng[1]} </Text>
-        <Text style = {styles.texto}> Poblacion:  {pais.population} </Text>
-        <Text style = {styles.texto}> Zona Horaria:  {pais.timezones.map(element => {return element+", "})} </Text>
-     
-        <Image resizeMode={'contain'} style = {{ width:200, height:150, marginBottom:6}} 
-               source={{uri: pais.coatOfArms.png}}/>  
-        
-        <TouchableOpacity style={ styles.btns }
-                          onPress={() => navigation.navigate("Home") }>
+    <View style = {styles.container}>
+        <ScrollView>
+            <View>
             
-        </TouchableOpacity>
-    </View>
-    </ScrollView>
+                        <Text style = {styles.titulo}> {pais.translations.spa.common} </Text>
+                        
+                        <Image style = {styles.imagen} resizeMode={'contain'}  
+                                source={{uri: pais.flags.png}}/>
+                        <Image style = {styles.escudo} resizeMode={'contain'} 
+                                source={{uri: pais.coatOfArms.png}}/> 
+                                
+                            <Card  style={{borderWidth:1, marginVertical:20, marginHorizontal: 30, borderRadius: 20}} >
+                                <Card.Content style = {styles.info2}>                         
+                                    <Text style = {styles.descripcion}> Region:</Text>
+                                    <Text style = {styles.texto}> {pais.region} </Text>
+                                </Card.Content>
+                                    <Card.Content style = {styles.info2}> 
+                                    <Text style = {styles.descripcion}> Sub-Region:</Text>
+                                    <Text style = {styles.descripcion}> {pais.subregion} </Text>
+                                </Card.Content>
+                                <Card.Content style = {styles.info2}> 
+                                    <Text style = {styles.descripcion}> Continente:</Text>
+                                    <Text style = {styles.descripcion}> {pais.continents} </Text>
+                                </Card.Content>                        
+                                <Card.Content style = {styles.info2}> 
+                                    <Text style = {styles.descripcion}> Capital:</Text>
+                                    <Text style = {styles.descripcion}> {pais.capital} </Text>
+                                </Card.Content>
+                                <Card.Content style = {styles.info2}> 
+                                    <Text style = {styles.descripcion}> Moneda:</Text>
+                                    <Text style = {styles.descripcion}> {pais.currencies[0]} </Text>
+                                </Card.Content>
+                                <Card.Content style = {styles.info2}> 
+                                    <Text style = {styles.descripcion}> Idioma:</Text>
+                                    <Text style = {styles.descripcion}> {pais.languages[0]} </Text>                  
+                                </Card.Content>
+                                <Card.Content style = {styles.info2}> 
+                                    <Text style = {styles.descripcion}> Latitud / Longitud(latlng):</Text>
+                                    <Text style = {styles.descripcion}> {pais.latlng[0]+" / "+pais.latlng[1]} </Text>                  
+                                </Card.Content>
+                                <Card.Content style = {styles.info2}> 
+                                    <Text style = {styles.descripcion}> Población:</Text>
+                                    <Text style = {styles.descripcion}> {pais.population} </Text>                 
+                                </Card.Content>
+                                <Card.Content style = {styles.info2}> 
+                                    <Text style = {styles.descripcion}> Zona Horaria:</Text>
+                                    <Text style = {styles.descripcion}> {pais.timezones.map(element => {return element+", "})} </Text>                  
+                                </Card.Content>                                                                        
+                            </Card>                        
+        {/* 
+                        <Text style = {styles.texto}> {pais.translations.spa.official} </Text>
+                        <Text style = {styles.texto}> Capital:  {pais.capital} </Text>
+                        <Text style = {styles.texto}> Region:  {pais.region} </Text>
+                        <Text style = {styles.texto}> Subregion:  {pais.subregion} </Text>
+                        <Text style = {styles.texto}> Continente:  {pais.continents} </Text>
+                        <Text style = {styles.texto}> Moneda:  {pais.currencies[0]} </Text>
+                        
+                        <Text style = {styles.texto}> Idioma:  {pais.languages[0]} </Text>
+                        
+                        <Text style = {styles.texto}> Latitud Longitud(latlng):  {pais.latlng[0]+", "+pais.latlng[1]} </Text>
+                        <Text style = {styles.texto}> Poblacion:  {pais.population} </Text>
+                        <Text style = {styles.texto}> Zona Horaria:  {pais.timezones.map(element => {return element+", "})} </Text>
+                    
+                        <Image resizeMode={'contain'} style = {{ width:200, height:150, marginBottom:6}} 
+        source={{uri: pais.coatOfArms.png}}/>  */}
+                        
+                    <TouchableOpacity style={ styles.btns } onPress = { () => {navigation.navigate("Home")} }>
+                    <Text  style={ styles.btnsTxt }>Volver al Inicio</Text>
+                    </TouchableOpacity> 
+            </View>
+        </ScrollView>       
     </View>
   
   );
@@ -53,39 +92,61 @@ export default function Pais({ route, navigation }) {
 
 const styles = StyleSheet.create({
   container: {
-    
-    backgroundColor: 'lightgrey',
-    alignItems: 'center',
-    justifyContent: 'center', 
-    paddingVertical:20  
+    flex: 1,
+    backgroundColor: '#becfd7',
+    justifyContent:'center',
   },
   titulo: {
     fontSize: 30,
     fontWeight: 'bold',
-    color: 'red',
+    color: 'black',
     alignSelf:'center',
-    marginBottom:10
+    marginVertical: 20
   },
-  texto: {
-    fontSize: 16,
-    textAlign: "left",
-    marginBottom: 5,
-    marginHorizontal: 2
 
-  },
   btns: {
     justifyContent: "center",
     backgroundColor: "#ffcd00",
     borderRadius: 6,
-    height: "5%",
     width: "60%",
-    marginHorizontal: "25%",
+    marginHorizontal: "20%",
+    padding:10,
+    elevation:5
   },
   btnsTxt: {
     textAlign: "center",
     color: "black",
     fontSize: 15,
     fontWeight: 'bold',        
+  },
+  info:{
+    fontSize: 15,
+    paddingVertical:1,
+    justifyContent: 'flex-start'
+  },
+  info2:{
+    width: '100%',
+    flexDirection:'row',
+    justifyContent: 'space-between',
+    alignItems: "center",
+    flexWrap: 'wrap',
+  },
+  descripcion: {
+    fontSize: 14,
+    textAlign: "left",
+    paddingVertical:2 
+  },
+  imagen: {
+    width:200, 
+    height:150, 
+    marginBottom:6,
+    marginHorizontal: '25%',
+  },
+  escudo: {
+    width:200, 
+    height:150, 
+    marginBottom:6,
+    marginHorizontal: '25%',
   },
 });
 

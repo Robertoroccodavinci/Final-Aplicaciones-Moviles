@@ -21,13 +21,15 @@ export default function Contacto({ navigation }) {
         <Text style={ styles.texto }> 
             Somos estudiantes en la Escuela Da Vinci de la carrera de Analista en Sistemas
         </Text> 
-    <FlatList
-    data={[
-        {key: '* Jhorky Escalante Quispe'},
-        {key: '* Roberto Andrés Rocco'},
-      ]}
-      renderItem={({item}) => <Text style={styles.item }>{item.key}</Text>}
-    />
+        <Text style={ styles.texto }> 
+            * Roberto Rocco
+        </Text> 
+        <Text style={ styles.texto }> 
+            * Jhorky Escalante Quispe
+        </Text> 
+
+                
+
      
         <Text style={ styles.titulo }> 
             Visitanos
@@ -50,17 +52,8 @@ export default function Contacto({ navigation }) {
             automaticallyAdjustContentInsets={false}
         />   */}          
 
-        </Text>
-        <Image style = {styles.mapa} source = {mapa}/>           
-        <Text style={ styles.titulo }> 
-            Contactanos
-        </Text>    
-        
-        <TouchableOpacity style={ styles.btns }
-                          onPress={() => navigation.navigate("Home")}>
-              <Text  style={ styles.btnsTxt }>Enviar</Text>
-        </TouchableOpacity> 
-
+          </Text>
+        <Image style = {styles.mapa} source = {mapa}/>
     </View>
     
   );
@@ -70,16 +63,14 @@ export default function Contacto({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#becfd7',
     alignItems: 'center',
-    justifyContent: 'center',
-    
-
+    justifyContent: 'center',  
   },
   titulo: {
-    fontSize: 20,
+    fontSize: 30,
     fontWeight: 'bold',
-    color: 'red'
+    color: 'black'
 
 
   },
@@ -87,7 +78,8 @@ const styles = StyleSheet.create({
     fontSize: 17,
     textAlign: "left",
     marginBottom: 20,
-    marginHorizontal: 20
+    marginHorizontal: 20,
+    color: 'black'
 
   },
   mapa: {
@@ -99,43 +91,5 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     textAlign: "left",
-  },
-  textBox: {
-    height: 50,
-    width: 300,
-    fontSize: 15,
-    textAlign: "center",
-    borderColor: "rgb(40, 162, 219)",
-    borderRadius: 10,
-    borderWidth: 3,
-    backgroundColor: 'white',
-    marginBottom: 10,
-    alignSelf: "center"
-  },
-  TextArea: {
-    height: 80,
-    width: 300,
-    fontSize: 15,
-    textAlign: "center",
-    borderColor: "rgb(40, 162, 219)",
-    borderRadius: 10,
-    borderWidth: 3,
-    backgroundColor: 'white',
-    marginBottom: 10,
-    alignSelf: "center"
-  },
-  btns: {
-    justifyContent: "center",
-    backgroundColor: "#ffcd00",
-    borderRadius: 6,
-    height: "5%",
-    width: "60%",
-    marginHorizontal: "25%",
-  },
-  btnsTxt: {
-    textAlign: "center",
-    color: "black",
-    fontSize: 15,
-    fontWeight: 'bold',        
   },
 });

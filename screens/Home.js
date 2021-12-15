@@ -25,9 +25,7 @@ export default function Home({ route, navigation }) {
   return (
    
     <View style = {styles.container}>
-      <ScrollView>
-
-        
+      <ScrollView>        
         
         <TextInput style = {styles.searchBar} placeholder = "Ingrese el Pais" onChangeText={text => setSearch(text)} />
         <View style={[styles.parent]}>
@@ -121,7 +119,8 @@ const styles = StyleSheet.create({
     textAlign: "center",
     color: "black",
     fontSize: 15,
-    fontWeight: 'bold',        
+    fontWeight: 'bold',
+           
   },
   parent: {
     width: '100%', 

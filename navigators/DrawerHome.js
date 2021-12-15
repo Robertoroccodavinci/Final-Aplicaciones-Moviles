@@ -57,7 +57,7 @@ export default function DrawerHome({route, navigation}) {
                         }}
                        >
       <Drawer.Screen  name="Home"   component={Home}
-                      options={{   title:'Inicio',
+                      options={{ title:'Inicio',
                       drawerIcon: ({focused, size}) => (
                                 <Ionicons name="home" size={size} color={focused ? 'black' : 'grey'}/> ), }}
                       initialParams={{lista: route.params.datos}} />
@@ -95,6 +95,7 @@ const Menu = ({navigation, name, img, props}) => {
                      />
 
         <Text style = {styles.about}> Proyecto Final App Moviles </Text>
+        <Text style = {styles.about}> @Copyright - 2021 | Ver. 1.0 </Text>
       </DrawerContentScrollView>
   )
 }
