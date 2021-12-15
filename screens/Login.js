@@ -24,16 +24,17 @@ export default function Login({ navigation }) {
   fetchLista();
 
   /* INICIO DE SESION */
-/*   const [request, response, promptAsync] = Google.useAuthRequest({
+   const [request, response, promptAsync] = Google.useAuthRequest({
         expoClientId: '601630457399-31isnqq8n9g76lhiabu1nt6drrthbkkf.apps.googleusercontent.com'
   });
   
     React.useEffect(() => {
       if (response?.type === 'success') {
+          const { authentication } = response;
           navigation.navigate("DrawerHome", {datos: paises, auth: response.authentication})
         }
     }, [response]);
-     */
+     
   return (
    
     <View style = {styles.container}>
@@ -45,8 +46,8 @@ export default function Login({ navigation }) {
           Necesitas iniciar sesión para poder acceder a la App.
         </Text>         
         <TouchableOpacity style={ styles.btns }
-                          onPress={() => /* {promptAsync();} */
-                          navigation.navigate("DrawerHome",{datos: paises})
+                          onPress={() =>  {promptAsync();} 
+                          //navigation.navigate("DrawerHome",{datos: paises})
                           }>
               <Text  style={ styles.btnsTxt }>Iniciar Sesión</Text>
         </TouchableOpacity>
