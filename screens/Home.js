@@ -46,6 +46,7 @@ export default function Home({ route, navigation }) {
 
                   <Text style={ styles.texto }> {element.translations.spa.common}</Text>
                   <Text style={ styles.texto }> ({element.capital})</Text>
+                  <Text style={ styles.texto }> [{element.continents}]</Text>
 
             </TouchableOpacity>
           </View>    

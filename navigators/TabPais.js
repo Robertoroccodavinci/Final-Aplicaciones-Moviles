@@ -27,7 +27,7 @@ export default function TabPais({route, navigation}) {
                                            source={{uri: route.params.pais.flags.png}}/>  
                           } else if (route.name === 'Clima') {
                             return <Image style={{ width:25, height:25}}
-                                          source={Icono} />
+                                          source={{uri: 'https://www.metaweather.com/static/img/weather/png/64/lc.png'}} />
                           }
 
                           // You can return any component that you like here!

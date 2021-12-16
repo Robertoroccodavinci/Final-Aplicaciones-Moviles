@@ -57,10 +57,7 @@ export default function Pais({ route, navigation }) {
                                     <Text style = {styles.descripcion}> Población:</Text>
                                     <Text style = {styles.descripcion}> {pais.population} </Text>                 
                                 </Card.Content>
-                                <Card.Content style = {styles.info2}> 
-                                    <Text style = {styles.descripcion}> Zona Horaria:</Text>
-                                    <Text style = {styles.descripcion}> {pais.timezones.map(element => {return element+", "})} </Text>                  
-                                </Card.Content>                                                                        
+                                                                
                             </Card>                        
         {/* 
                         <Text style = {styles.texto}> {pais.translations.spa.official} </Text>
@@ -111,7 +108,8 @@ const styles = StyleSheet.create({
     width: "60%",
     marginHorizontal: "20%",
     padding:10,
-    elevation:5
+    elevation:5,
+    marginBottom:7
   },
   btnsTxt: {
     textAlign: "center",

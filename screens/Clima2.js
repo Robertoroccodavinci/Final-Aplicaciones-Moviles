@@ -11,21 +11,21 @@ export default function Clima2({ route, navigation }) {
   const[clima, setClima] = React.useState([])
   const[datos, setDatos] = React.useState([])
   const estadoClima={
-    "Clear" : "Despejado",
-    "Clouds" : "Nublado",
-    "Snow" : "Nevando",
-    "Rain" : "Lloviendo",
-    "Thunderstorm" : "Tormenta eléctrica",
-    "Drizzle" : "Llovizna",
-    "Mist" : "Neblina",
-    "Fog" : "Niebla",
-    "Smoke" : "Humo",
-    "Haze" : "Neblina",
-    "Dust" : "Tormenta de Polvo",
-    "Sand" : "Tormenta de Arena",
-    "Ash" : "Cenizas",
-    "Squall" : "Chubascos",
-    "Tornado" : "Tornado"
+    "Clear" :{ name:"Despejado", icon:'https://www.metaweather.com/static/img/weather/png/64/c.png'},
+    "Clouds" : { name: "Nublado", icon:'https://www.metaweather.com/static/img/weather/png/64/hc.png'},
+    "Snow" : { name:"Nevando", icon:'https://www.metaweather.com/static/img/weather/png/64/sn.png'},
+    "Rain" : { name: "Lloviendo", icon:'https://www.metaweather.com/static/img/weather/png/64/hr.png'},
+    "Thunderstorm" : { name: "Tormenta eléctrica", icon:'https://www.metaweather.com/static/img/weather/png/64/t.png'},
+    "Drizzle" : { name: "Llovizna", icon:'https://www.metaweather.com/static/img/weather/png/64/lr.png'},
+    "Mist" : { name: "Neblina", icon:'https://www.metaweather.com/static/img/weather/png/64/hc.png'},
+    "Fog" : { name: "Niebla", icon:'https://www.metaweather.com/static/img/weather/png/64/hc.png'},
+    "Smoke" : { name: "Humo", icon:'https://www.metaweather.com/static/img/weather/png/64/hc.png'},
+    "Haze" : { name: "Neblina", icon:'https://www.metaweather.com/static/img/weather/png/64/hc.png'},
+    "Dust" : { name: "Tormenta de Polvo", icon:'https://www.metaweather.com/static/img/weather/png/64/hc.png'},
+    "Sand" : { name: "Tormenta de Arena", icon:'https://www.metaweather.com/static/img/weather/png/64/hc.png'},
+    "Ash" : { name: "Cenizas", icon:'https://www.metaweather.com/static/img/weather/png/64/hc.png'},
+    "Squall" : { name: "Chubascos", icon: 'https://www.metaweather.com/static/img/weather/png/64/s.png'},
+    "Tornado" : { name: "Tornado", icon:'https://www.metaweather.com/static/img/weather/png/64/hc.png'},
   }
 
   const unixToDate = (timestamp) => {
@@ -114,14 +114,14 @@ export default function Clima2({ route, navigation }) {
                     <Card.Content style = {styles.clima}>
 
                         <Image resizeMode={'contain'} style = {{ width:50, height:50, marginBottom:6}}  
-                                source={{ uri: `http://openweathermap.org/img/w/${clima.weather[0].icon}.png` }} />
+                                source={{ uri: estadoClima[clima.weather[0].main].icon }} />
 
                         <Text style = {styles.temp}>{(clima.main.temp-272.15).toFixed()+"°"} </Text>
 
                     </Card.Content>
                     <Card.Content style = {styles.info2}>
                       <Text style = {styles.descripcion}> Estado:</Text>
-                      <Text style = {styles.descripcion}> {estadoClima[clima.weather[0].main]} </Text>
+                      <Text style = {styles.descripcion}> {estadoClima[clima.weather[0].main].name} </Text>
                     </Card.Content>
                     <Card.Content style = {styles.info2}> 
                         <Text style = {styles.descripcion}> Temperatura Máxima:</Text>
@@ -170,6 +170,10 @@ export default function Clima2({ route, navigation }) {
                     <Card.Content style = {styles.info2}> 
                         <Text style = {styles.descripcion}> Velocidad del Viento:</Text>
                         <Text style = {styles.descripcion}> {clima.wind.speed+" m/s"} </Text>                   
+                    </Card.Content>
+                    <Card.Content style = {styles.info2}> 
+                        <Text style = {styles.descripcion}> Velocidad del Viento:</Text>
+                        <Text style = {styles.descripcion}> {"UTC "+(clima.timezone/3600)+":00"} </Text>                   
                     </Card.Content>
                 </Card>
 
@@ -221,7 +225,7 @@ const styles = StyleSheet.create({
     borderRadius: 6,
     width: "20%",
     marginHorizontal: "38%",
-
+    marginBottom:5,
     elevation:5
   },
   btnsTxt: {
