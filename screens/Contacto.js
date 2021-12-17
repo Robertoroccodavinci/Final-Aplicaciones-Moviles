@@ -1,14 +1,9 @@
 import { StatusBar } from 'expo-status-bar';
 import React, {component} from 'react';
-import {FlatList, StyleSheet, TextInput, Image, Text, View,TouchableOpacity, ScrollView } from 'react-native';
-//import { WebView } from 'react-native-webview';
+import {FlatList, StyleSheet, TextInput, Image, Text, View,TouchableOpacity, ScrollView, Dimensions} from 'react-native';
+import MapView, { PROVIDER_GOOGLE,Marker } from 'react-native-maps';
+import mapStyle from '../components/mapStyle.js';
 
-
-import mapa from "../images/mapa.png";
-
-/* const iframeString = {"<iframe style="width:100%; height:350px" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d820.9965489892207!2d-58.396387782290056!3d-34.60451056844648!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bccaea670d4e67%3A0x2198c954311ad6d9!2sDa%20Vinci!5e0!3m2!1ses!2sar!4v1600835578184!5m2!1ses!2sar"></iframe>"} */
-
-/* https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d820.9965489892207!2d-58.396387782290056!3d-34.60451056844648!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bccaea670d4e67%3A0x2198c954311ad6d9!2sDa%20Vinci!5e0!3m2!1ses!2sar!4v1600835578184!5m2!1ses!2sar */
 export default function Contacto({ navigation }) {
 
   return (
@@ -28,32 +23,26 @@ export default function Contacto({ navigation }) {
             * Jhorky Escalante Quispe
         </Text> 
 
-                
-
-     
-        <Text style={ styles.titulo }> 
-            Visitanos
-{/*             <WebView
-            scalesPageToFit={true}
-            bounces={false}
-            javaScriptEnabled
-            style={{ height: 500, width: 300 }}
-            source={{
-              html: `
-                    <!DOCTYPE html>
-                    <html>
-                      <head></head> // <--add header styles if needed
-                      <body>
-                        <div id="baseDiv">${iframeString}</div> //<--- add your iframe here
-                      </body>
-                    </html>
-              `,
-            }}
-            automaticallyAdjustContentInsets={false}
-        />   */}          
-
-          </Text>
-        <Image style = {styles.mapa} source = {mapa}/>
+        <Text style={ styles.titulo }> Visitanos </Text>
+        <MapView  customMapStyle={mapStyle}
+                  provider={PROVIDER_GOOGLE}
+                  style={styles.mapStyle}
+                  initialRegion={{
+                    latitude:  -34.604339111357305,
+                    longitude:  -58.39602025889558,
+                    latitudeDelta: 0.009,
+                    longitudeDelta: 0.009,
+                  }}
+                  mapType="standard" > 
+                  <Marker 
+                  coordinate={{
+                    latitude:  -34.604339111357305,
+                    longitude:  -58.39602025889558,
+                  }}
+                ></Marker>
+          </MapView>
+        
+        
     </View>
     
   );
@@ -91,5 +80,9 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     textAlign: "left",
+  },
+  mapStyle: {
+    width: '90%',
+    height:'40%',    
   },
 });

@@ -21,8 +21,13 @@ export default function Pais({ route, navigation }) {
                         
                         <Image style = {styles.imagen} resizeMode={'contain'}  
                                 source={{uri: pais.flags.png}}/>
-                        <Image style = {styles.escudo} resizeMode={'contain'} 
+                        {
+                        (pais.coatOfArms.png)? 
+                            <Image style = {styles.escudo} resizeMode={'contain'} 
                                 source={{uri: pais.coatOfArms.png}}/> 
+                        : <Text>--</Text>
+                        }
+                        
                                 
                             <Card  style={{borderWidth:1, marginVertical:20, marginHorizontal: 30, borderRadius: 20}} >
                                 <Card.Content style = {styles.info2}>                         
@@ -51,11 +56,11 @@ export default function Pais({ route, navigation }) {
                                 </Card.Content>
                                 <Card.Content style = {styles.info2}> 
                                     <Text style = {styles.descripcion}> Latitud / Longitud(latlng):</Text>
-                                    <Text style = {styles.descripcion}> {pais.latlng[0]+" / "+pais.latlng[1]} </Text>                  
+                                    <Text style = {styles.descripcion}> {pais.latlng[0].toFixed(2)+" / "+pais.latlng[1].toFixed(2)} </Text>                  
                                 </Card.Content>
                                 <Card.Content style = {styles.info2}> 
                                     <Text style = {styles.descripcion}> Población:</Text>
-                                    <Text style = {styles.descripcion}> {pais.population} </Text>                 
+                                    <Text style = {styles.descripcion}> {pais.population} hab.</Text>                 
                                 </Card.Content>
                                                                 
                             </Card>                        

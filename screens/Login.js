@@ -40,7 +40,7 @@ export default function Login({ navigation }) {
     <View style = {styles.container}>
       <StatusBar hidden />
         <Text style = {styles.titulo}> 
-            Bienvenido a nuestro Proyecto 
+            Bienvenido a nuestro Proyecto
         </Text>
         <Text style={ styles.texto }> 
           Necesitas iniciar sesión para poder acceder a la App.

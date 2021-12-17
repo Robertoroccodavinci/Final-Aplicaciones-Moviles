@@ -9,6 +9,7 @@ const Drawer = createDrawerNavigator();
 import Home from '../screens/Home';
 import Contacto from '../screens/Contacto';
 import ListaPaises from '../screens/ListaPaises';
+import Map from '../screens/Map';
 
 import { set } from 'react-native-reanimated'; 
 
@@ -24,8 +25,8 @@ export default function DrawerHome({route, navigation}) {
       .then(res => res.json())
       .then(res => {console.log(res);
         setUserInfo(res.name),
-        setImgUser(res.picture),
-        console.log(userInfo)
+        setImgUser(res.picture)
+        /* console.log(userInfo) */
       })
     }
 
@@ -68,6 +69,12 @@ export default function DrawerHome({route, navigation}) {
                                 <Ionicons name="list-sharp" size={size} color={focused ? 'black' : 'grey'}/> ), }}
                       initialParams={{lista: route.params.datos}} />
 
+      <Drawer.Screen  name="Map"   component={Map} 
+                      options={{   title:'Mapa', 
+                      drawerIcon: ({focused, size}) => (
+                                  <MaterialIcons name="map" size={size} color={focused ? 'black' : 'grey'}/> ), }} 
+                      initialParams={{lista: route.params.datos}} />
+
       <Drawer.Screen  name="Contacto"   component={Contacto} 
                       options={{   title:'Contacto',
                       drawerIcon: ({focused, size}) => (
@@ -84,7 +91,10 @@ const Menu = ({navigation, name, img, props}) => {
         <View style = {styles.info}>
            
            {/* REVISAR ERROR */}
-           <Image style = {styles.imgUser} source={{uri: img}} /> 
+           
+            <Image style = {styles.imgUser} source={ (img !== '')?{uri: img}: require('../images/user-icon.png')  } />  
+            
+           
 
           <Text> {name}</Text>
         </View>
