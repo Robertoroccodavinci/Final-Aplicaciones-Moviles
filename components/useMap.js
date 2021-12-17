@@ -29,10 +29,10 @@ export function useMap() {
     if (mapRef) {
       mapRef.current.animateToRegion(
         {
-          latitude: 41.3995345,
-          longitude: 2.1909796,
-          latitudeDelta: 0.003,
-          longitudeDelta: 0.003,
+          latitude:  -34,  
+          longitude: -64,
+          latitudeDelta: 30,
+          longitudeDelta: 30,
         },
         500
       );

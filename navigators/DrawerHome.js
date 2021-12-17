@@ -23,10 +23,9 @@ export default function DrawerHome({route, navigation}) {
     function getUserInfo(token){
       fetch(token)
       .then(res => res.json())
-      .then(res => {console.log(res);
+      .then(res => {
         setUserInfo(res.name),
         setImgUser(res.picture)
-        /* console.log(userInfo) */
       })
     }
 
@@ -44,7 +43,6 @@ export default function DrawerHome({route, navigation}) {
                        screenOptions={{
                           drawerStyle: {
                             backgroundColor: '#b3e5fb',
-                            
                         },
                         drawerLabelStyle:{
                           fontWeight:'bold'

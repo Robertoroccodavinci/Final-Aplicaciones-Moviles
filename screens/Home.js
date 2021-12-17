@@ -29,7 +29,7 @@ export default function Home({ route, navigation }) {
         
         <TextInput style = {styles.searchBar} placeholder = "Ingrese el Pais" onChangeText={text => setSearch(text)} />
         <View style={[styles.parent]}>
-        {(search === '')? <Text>Busca el pais que estas buscando</Text>
+        {(search === '')? <Text style={{ marginHorizontal:'15%'}}  > Busca el pais que estas buscando</Text>
         :paises.map(element =>{
           
           if(count!== maxCount && element.capital && element.translations.spa.common.toLowerCase().includes(search.toLocaleLowerCase())){
@@ -56,7 +56,7 @@ export default function Home({ route, navigation }) {
 
         })}
             </View> 
-        {( search !== '' && paises[count+1] === null)? 
+        {( search === '' )? 
          <Text style={ styles.texto }> No hay mas resultados para su busqueda </Text>
          :  <TouchableOpacity style={ styles.btns } onPress={() => { setMaxCount(maxCount+10) } }>
               <Text  style={ styles.btnsTxt }>Mostrar más</Text>
