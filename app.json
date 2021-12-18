@@ -30,6 +30,7 @@
           "apiKey": "AIzaSyC0JqYXHEODx95UX5CVn0eAcEo8T3fJrn8"
         }
       }
+
     },
     "web": {
       "favicon": "./assets/favicon.png"

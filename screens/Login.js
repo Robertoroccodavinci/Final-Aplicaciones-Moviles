@@ -18,7 +18,7 @@ export default function Login({ navigation }) {
     fetch("https://restcountries.com/v3.1/all") 
     .then( response =>  response.json() )
     .then( data => { setPaises(data) } )
-
+    
   }
 
   fetchLista();
@@ -31,7 +31,13 @@ export default function Login({ navigation }) {
     React.useEffect(() => {
       if (response?.type === 'success') {
           const { authentication } = response;
-          navigation.navigate("DrawerHome", {datos: paises, auth: response.authentication})
+          paises.sort( (x, y) => {
+            let a = x.translations.spa.common,
+                b = y.translations.spa.common;
+            return a == b ? 0 : a > b ? 1 : -1;
+        })
+          navigation.navigate("DrawerHome", {datos: paises, 
+                                            auth: response.authentication})
         }
     }, [response]);
      

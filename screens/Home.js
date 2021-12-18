@@ -7,9 +7,7 @@ export default function Home({ route, navigation }) {
   
   const[paises,setPaises] = React.useState(route.params.lista);
   const[search, setSearch] = React.useState("");
-  const[results, setResults] = React.useState([]);
-  const[datos, setDatos] = React.useState([]);
-  
+   
   var count = 0;
   
   const[maxCount,setMaxCount] = React.useState(10);

@@ -3,8 +3,6 @@ import React from 'react';
 import { StyleSheet, Text, View,TouchableOpacity, Image, ScrollView } from 'react-native';
 import { Card } from 'react-native-paper';
 
-import axios from 'axios';
-
 export default function Clima({ route, navigation }) {
 
   const[clima, setClima] = React.useState([])
