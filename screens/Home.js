@@ -43,7 +43,6 @@ export default function Home({ route, navigation }) {
                      source={{uri: element.flags.png}}/>  
 
                   <Text style={ styles.texto }> {element.translations.spa.common}</Text>
-                  <Text style={ styles.texto }> ({element.capital})</Text>
                   <Text style={ styles.texto }> [{element.continents}]</Text>
 
             </TouchableOpacity>

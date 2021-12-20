@@ -46,16 +46,9 @@ export default function Pais({ route, navigation }) {
                                     <Text style = {styles.descripcion}> Capital:</Text>
                                     <Text style = {styles.descripcion}> {pais.capital} </Text>
                                 </Card.Content>
+                               
                                 <Card.Content style = {styles.info2}> 
-                                    <Text style = {styles.descripcion}> Moneda:</Text>
-                                    <Text style = {styles.descripcion}> {pais.currencies[0]} </Text>
-                                </Card.Content>
-                                <Card.Content style = {styles.info2}> 
-                                    <Text style = {styles.descripcion}> Idioma:</Text>
-                                    <Text style = {styles.descripcion}> {pais.languages[0]} </Text>                  
-                                </Card.Content>
-                                <Card.Content style = {styles.info2}> 
-                                    <Text style = {styles.descripcion}> Latitud / Longitud(latlng):</Text>
+                                    <Text style = {styles.descripcion}> Coordenadas:</Text>
                                     <Text style = {styles.descripcion}> {pais.latlng[0].toFixed(2)+" / "+pais.latlng[1].toFixed(2)} </Text>                  
                                 </Card.Content>
                                 <Card.Content style = {styles.info2}> 

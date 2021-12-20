@@ -10,7 +10,6 @@ const Tabs = createBottomTabNavigator();
 
 import Pais from '../screens/Pais';
 import Clima from '../screens/Clima';
-import Clima2 from '../screens/Clima2';
 
 export default function TabPais({route, navigation}) {
 
@@ -41,9 +40,7 @@ export default function TabPais({route, navigation}) {
                       })} >
         <Tabs.Screen name="Pais" component={Pais} options={{  headerShown: false }} initialParams={{ pais: route.params.pais}} />
 
-        {/* <Tabs.Screen name="Clima" component={Clima} options={{  headerShown: false }} initialParams={{ pais: route.params.pais}} /> */}
-        
-        <Tabs.Screen name="Clima" component={Clima2} options={{  headerShown: false }} initialParams={{ pais: route.params.pais}} />
+        <Tabs.Screen name="Clima" component={Clima} options={{  headerShown: false }} initialParams={{ pais: route.params.pais}} />
         
       </Tabs.Navigator>
 

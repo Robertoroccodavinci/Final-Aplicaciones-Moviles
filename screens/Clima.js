@@ -1,48 +1,90 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View,TouchableOpacity, Image, ScrollView } from 'react-native';
+import { StyleSheet, Text, View,TouchableOpacity, Image, ScrollView, Linking } from 'react-native';
 import { Card } from 'react-native-paper';
 
 export default function Clima({ route, navigation }) {
-
+  
+  const[pais,setPais] = React.useState(route.params.pais);
   const[clima, setClima] = React.useState([])
   const[datos, setDatos] = React.useState([])
-  const[pais,setPais] = React.useState(route.params.pais);
-
   const estadoClima={
-    "Clear" : "Despejado",
-    "Heavy Cloud" : "Nublado",
-    "light Cloud" : "Parcialmente nublado",
-    "Snow" : "Nevando",
-    "Heavy Rain" : "Lloviendo",
-    "Light Rain" : "Llovizna",
-    "Showers" : "Chubascos",
-    "Thunderstorm" : "Tormenta eléctrica",
-    "Hail" : "Granizando"
+    "Clear" :{ name:"Despejado", icon:'https://www.metaweather.com/static/img/weather/png/64/c.png'},
+    "Clouds" : { name: "Nublado", icon:'https://www.metaweather.com/static/img/weather/png/64/hc.png'},
+    "Snow" : { name:"Nevando", icon:'https://www.metaweather.com/static/img/weather/png/64/sn.png'},
+    "Rain" : { name: "Lloviendo", icon:'https://www.metaweather.com/static/img/weather/png/64/hr.png'},
+    "Thunderstorm" : { name: "Tormenta eléctrica", icon:'https://www.metaweather.com/static/img/weather/png/64/t.png'},
+    "Drizzle" : { name: "Llovizna", icon:'https://www.metaweather.com/static/img/weather/png/64/lr.png'},
+    "Mist" : { name: "Neblina", icon:'https://www.metaweather.com/static/img/weather/png/64/hc.png'},
+    "Fog" : { name: "Niebla", icon:'https://www.metaweather.com/static/img/weather/png/64/hc.png'},
+    "Smoke" : { name: "Humo", icon:'https://www.metaweather.com/static/img/weather/png/64/hc.png'},
+    "Haze" : { name: "Neblina", icon:'https://www.metaweather.com/static/img/weather/png/64/hc.png'},
+    "Dust" : { name: "Tormenta de Polvo", icon:'https://www.metaweather.com/static/img/weather/png/64/hc.png'},
+    "Sand" : { name: "Tormenta de Arena", icon:'https://www.metaweather.com/static/img/weather/png/64/hc.png'},
+    "Ash" : { name: "Cenizas", icon:'https://www.metaweather.com/static/img/weather/png/64/hc.png'},
+    "Squall" : { name: "Chubascos", icon: 'https://www.metaweather.com/static/img/weather/png/64/s.png'},
+    "Tornado" : { name: "Tornado", icon:'https://www.metaweather.com/static/img/weather/png/64/hc.png'},
   }
-  
+
+  const unixToDate = (timestamp) => {
+    let date =new Date(timestamp*1000)
+    let results = "";
+    
+    results+= date.getHours()+":";
+    let minutos = ((date.getMinutes() < 10)? "0"+date.getMinutes() : date.getMinutes() );
+    
+    results += minutos+":";
+    let segundos = ((date.getSeconds() < 10)? "0"+date.getSeconds() : date.getSeconds() );
+    
+    results += segundos;
+    
+    return results;
+  }
+
+  const unixToDates = (timestamp) => {
+    let date1 =new Date(timestamp*1000)
+    let results1 = "";
+    
+     results1+= date1.getDate()+"/";
+    let mes1 = (date1.getMonth()+1 );
+
+    results1+= mes1+"/";
+    let anio1 = (date1.getFullYear() ); 
+
+    results1+= anio1+" ";
+    let hora1 = (date1.getHours() );
+
+    results1+= hora1+":";
+    let minutos1 = ((date1.getMinutes() < 10)? "0"+date1.getMinutes() : date1.getMinutes() );
+
+    results1 += minutos1+":";
+    let segundos1 = ((date1.getSeconds() < 10)? "0"+date1.getSeconds() : date1.getSeconds() );
+
+
+
+/* 
+    results1+= date1.getHours()+":";
+    let minutos1 = ((date1.getMinutes() < 10)? "0"+date1.getMinutes() : date1.getMinutes() );
+
+    results1+= date1.getHours()+":";
+    let minutos1 = ((date1.getMinutes() < 10)? "0"+date1.getMinutes() : date1.getMinutes() );
+    
+    results1 += minutos1+":";
+    let segundos1 = ((date1.getSeconds() < 10)? "0"+date1.getSeconds() : date1.getSeconds() ); */
+    
+    results1 += segundos1;
+    
+    return results1;
+  }
+
   React.useEffect(() => {
-
-
-    fetch("http://www.metaweather.com/api/location/search/?query="+pais.capital)
-    .then( (response) =>  {return response.json()} )
-    .then( (data) => { setDatos(data) })
+    /* fetch("http://www.metaweather.com/api/location/search/?query="+pais.capital) */
+    fetch("http://api.openweathermap.org/data/2.5/weather?q="+pais.capital+"&appid=70ad8d4347bac947713211b26d9c822f" )
+    .then( (response) => { return response.json() } )
+    .then( (data) => { setClima(data) })
     .catch(error => console.log(error))
-
-  }, [pais]);
-
-  React.useEffect(() => {
-
-    if(datos[0]){
-        fetch("http://www.metaweather.com/api/location/"+datos[0].woeid+"/")
-        .then(response =>  {return response.json()}  )
-        .then(data =>  {setClima(data) })
-        .catch(error => console.log(error));
-    }
-
-  }, [datos]);
-
-
+    
+  }, []);
   
   
 
@@ -52,50 +94,95 @@ export default function Clima({ route, navigation }) {
     <ScrollView>  
         <StatusBar hidden/>
     
-        <Text style = {styles.titulo}> {"Clima en "+pais.capital} </Text>
+        {/* <Text style = {styles.titulo}> {"Clima en "+pais.capital} </Text> */}
+        <Text style = {styles.titulo}>Clima</Text>
+{/*         <Text style = {styles.texto}> {pais.translations.spa.common+pais.flag} </Text>
+  <Text style = {styles.texto}> Latitud Longitud(latlng):  {pais.latlng[0]+", "+pais.latlng[1]} </Text> */}
 
-        <Text style = {styles.texto}> {pais.translations.spa.common+pais.flag} </Text>
-        <Text style = {styles.texto}> Latitud Longitud(latlng):  {pais.latlng[0]+", "+pais.latlng[1]} </Text>
-
-        {/* ICONOS http://openweathermap.org/img/w/02n.png */}
-
-        {(clima.consolidated_weather)? 
+        {(clima.weather)? 
+            
             <View>
-            {clima.consolidated_weather.map(element => {
-                return(
+                
+                {/* DIA 1 */}
+                <Card  style={{borderWidth:1, marginVertical:50, marginHorizontal: 50, borderRadius: 20}} >
+{/*                     <Card.Title title={"DIA"} 
+        subtitle={"FECHA"} /> */}
+                        <Card.Title titleStyle={{fontWeight: 'bold'}} title={pais.capital} subtitleStyle={{fontWeight: 'bold'}}
+                        subtitle={unixToDates(clima.dt)} />
+                    <Card.Content style = {styles.clima}>
 
-                    <Card key={element.applicable_date}  style={{borderWidth:1, marginVertical:3}} >
-                    <Card.Title title={element.applicable_date} 
-                                subtitle={element.created} />
-                    <Card.Content>
                         <Image resizeMode={'contain'} style = {{ width:50, height:50, marginBottom:6}}  
-                                source={{ uri: "https://www.metaweather.com/static/img/weather/png/"+element.weather_state_abbr+".png" }} />
-                        <Text style = {styles.descripcion}> Estado:  {estadoClima[element.weather_state_name]} </Text>
-                        <Text style = {styles.descripcion}> Posibilidad de precipitaciones:  {element.predictability+"%"} </Text>
-                        <Text style = {styles.descripcion}> Humedad:  {element.humidity+"%"} </Text>
-                        <Text style = {styles.descripcion}> Presion:  {element.air_pressure+" hPa"} </Text>
-                        <Text style = {styles.descripcion}> Temperatura:  {(element.the_temp).toFixed(2)+"°"} </Text>
-                        <Text style = {styles.descripcion}> Max Temperatura:  {(element.max_temp).toFixed(2)+"°"} </Text>
-                        <Text style = {styles.descripcion}> Min Temperatura:  {(element.min_temp).toFixed(2)+"°"} </Text>
-                        <Text style = {styles.descripcion}> Direccion del viento:  {element.wind_direction_compass+", "+(element.wind_direction).toFixed(2)+"°"} </Text>
-                        <Text style = {styles.descripcion}> Velocidad del Viento:  {(element.wind_speed*1.60934).toFixed(2)+" kmph"} </Text>
+                                source={{ uri: estadoClima[clima.weather[0].main].icon }} />
+
+                        <Text style = {styles.temp}>{(clima.main.temp-272.15).toFixed()+"°"} </Text>
+
                     </Card.Content>
-                    </Card>
+                    <Card.Content style = {styles.info2}>
+                      <Text style = {styles.descripcion}> Estado:</Text>
+                      <Text style = {styles.descripcion}> {estadoClima[clima.weather[0].main].name} </Text>
+                    </Card.Content>
+                    <Card.Content style = {styles.info2}> 
+                        <Text style = {styles.descripcion}> Temperatura Máxima:</Text>
+                        <Text style = {styles.descripcion}> {(clima.main.temp_max-272.15).toFixed(1)+"°"} </Text>
+                    </Card.Content>
+                    <Card.Content style = {styles.info2}> 
+                        <Text style = {styles.descripcion}> Temperatura Mínima:</Text>
+                        <Text style = {styles.descripcion}> {(clima.main.temp_min-272.15).toFixed(1)+"°"} </Text>
+                    </Card.Content>
+                    <Card.Content style = {styles.info2}> 
+                        <Text style = {styles.descripcion}> Sensación térmica:</Text>
+                        <Text style = {styles.descripcion}> {(clima.main.feels_like-272.15).toFixed(1)+"°"} </Text>
+                    </Card.Content>
+                    <Card.Content style = {styles.info2}>                        
+                        <Text style = {styles.descripcion}> Humedad:</Text>
+                        <Text style = {styles.descripcion}> {clima.main.humidity+"%"} </Text>
+                    </Card.Content>                                                                             
+                    <Card.Content style={{marginVertical:3}}>
+                      <TouchableOpacity style={ styles.btns } onPress={() => Linking.openURL('https://google.com') }>
+                        <Text  style={ styles.btnsTxt }>Más</Text>
+                      </TouchableOpacity> 
+                    </Card.Content>
+                </Card>
 
-                )
+                <Card  style={{borderWidth:1, marginBottom:20, marginHorizontal: 30, borderRadius: 20}} >
+                    <Card.Content style = {styles.info2}>                         
+                        <Text style = {styles.descripcion}> Presion:</Text>
+                        <Text style = {styles.descripcion}> {clima.main.pressure+" hPa"} </Text>
+                    </Card.Content>
+                        <Card.Content style = {styles.info2}> 
+                        <Text style = {styles.descripcion}> Salida del Sol:</Text>
+                        <Text style = {styles.descripcion}> {unixToDate(clima.sys.sunrise)+" hrs"} </Text>
+                    </Card.Content>
+                    <Card.Content style = {styles.info2}> 
+                        <Text style = {styles.descripcion}> Puesta del Sol:</Text>
+                        <Text style = {styles.descripcion}> {unixToDate(clima.sys.sunset)+" hrs"} </Text>
+                    </Card.Content>                        
+                    <Card.Content style = {styles.info2}> 
+                        <Text style = {styles.descripcion}> Visibilidad:</Text>
+                        <Text style = {styles.descripcion}> {clima.visibility+" m"} </Text>
+                    </Card.Content>
+                    <Card.Content style = {styles.info2}> 
+                        <Text style = {styles.descripcion}> Dirección del Viento:</Text>
+                        <Text style = {styles.descripcion}> {clima.wind.deg+"°"} </Text>
+                    </Card.Content>
+                    <Card.Content style = {styles.info2}> 
+                        <Text style = {styles.descripcion}> Velocidad del Viento:</Text>
+                        <Text style = {styles.descripcion}> {clima.wind.speed+" m/s"} </Text>                   
+                    </Card.Content>
+                    <Card.Content style = {styles.info2}> 
+                        <Text style = {styles.descripcion}> Velocidad del Viento:</Text>
+                        <Text style = {styles.descripcion}> {"UTC "+(clima.timezone/3600)+":00"} </Text>                   
+                    </Card.Content>
+                </Card>
 
-
-            })}
-                
-
-                
            </View>
-
+       
         /* SI NO HAY DATOS */
-        : <Text style = {styles.descripcion}>NO HAY DATOS</Text>}        
-
-
-        <TouchableOpacity style={ styles.btns } onPress={() => navigation.navigate("Home") } />
+        : <Text style = {styles.descripcion}>NO HAY DATOS</Text> }   
+        
+        <TouchableOpacity style={ styles.btns } onPress = { () => {navigation.navigate("Home")} }>
+          <Text  style={ styles.btnsTxt }>Volver al Inicio</Text>
+        </TouchableOpacity> 
 
     </ScrollView>
     </View>
@@ -106,18 +193,16 @@ export default function Clima({ route, navigation }) {
 
 const styles = StyleSheet.create({
   container: {
-    
-    backgroundColor: 'lightgrey',
-    alignItems: 'center',
-    justifyContent: 'center', 
-    paddingVertical:20  
+    flex: 1,
+    backgroundColor: '#becfd7',
+    justifyContent:'center',   
   },
   titulo: {
     fontSize: 30,
     fontWeight: 'bold',
-    color: 'red',
+    color: 'black',
     alignSelf:'center',
-    marginBottom:10
+    marginTop:20
   },
   texto: {
     fontSize: 16,
@@ -129,17 +214,17 @@ const styles = StyleSheet.create({
   descripcion: {
     fontSize: 14,
     textAlign: "left",
-    paddingVertical:1
-   
+    paddingVertical:2 
 
   },
   btns: {
     justifyContent: "center",
     backgroundColor: "#ffcd00",
     borderRadius: 6,
-    height: "5%",
-    width: "60%",
-    marginHorizontal: "25%",
+    width: "20%",
+    marginHorizontal: "38%",
+    marginBottom:5,
+    elevation:5
   },
   btnsTxt: {
     textAlign: "center",
@@ -147,147 +232,88 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: 'bold',        
   },
+  clima:{
+    flexDirection:'row',
+    justifyContent: 'space-around',
+    alignItems: "center",
+    marginLeft: '20%',
+  },
+  temp: {
+    fontSize: 40,
+    paddingVertical:1,
+    marginRight: '30%',
+    fontWeight: 'bold',
+  },
+  info:{
+    fontSize: 15,
+    paddingVertical:1,
+    justifyContent: 'flex-start'
+  },
+  info2:{
+    width: '100%',
+    flexDirection:'row',
+    justifyContent: 'space-between',
+    alignItems: "center",
+    flexWrap: 'wrap',
+  },
 });
 
 
 
-/* 
+/*  
+
 {
-    "consolidated_weather": [
+    "coord": {
+        "lon": -66.8792,
+        "lat": 10.488
+    },
+    "weather": [
         {
-            ###########################################################################################################
-            ###########################################################################################################
-            
-            "id": 5820480029196288,
-            "weather_state_name": "Showers",
-            "weather_state_abbr": "s",
-            "wind_direction_compass": "NNE",
-            "created": "2021-12-12T23:09:55.741174Z",
-            "applicable_date": "2021-12-12",
-            "min_temp": 17.03,
-            "max_temp": 24.869999999999997,
-            "the_temp": 25.42,
-            "wind_speed": 4.027407172767041,
-            "wind_direction": 28.70365733717988,
-            "air_pressure": 1013.0,
-            "humidity": 75,
-            "visibility": 12.314955658951721,
-            "predictability": 73
+            "id": 802,
+            "main": "Clouds",
+            "description": "scattered clouds",
+            "icon": "03d"
         },
         {
-            ###########################################################################################################
-            ###########################################################################################################
-
-            "id": 5094124957990912,
-            "weather_state_name": "Light Rain",
-            "weather_state_abbr": "lr",
-            "wind_direction_compass": "NNE",
-            "created": "2021-12-12T23:09:58.477266Z",
-            "applicable_date": "2021-12-13",
-            "min_temp": 17.53,
-            "max_temp": 24.14,
-            "the_temp": 24.965,
-            "wind_speed": 3.5593628553302055,
-            "wind_direction": 13.857093781634326,
-            "air_pressure": 1014.0,
-            "humidity": 78,
-            "visibility": 9.27862532808399,
-            "predictability": 75
-        },
-        {
-            ###########################################################################################################
-            ###########################################################################################################
-
-            "id": 4756181026340864,
-            "weather_state_name": "Heavy Rain",
-            "weather_state_abbr": "hr",
-            "wind_direction_compass": "NE",
-            "created": "2021-12-12T23:10:01.863243Z",
-            "applicable_date": "2021-12-14",
-            "min_temp": 18.025,
-            "max_temp": 23.325,
-            "the_temp": 23.305,
-            "wind_speed": 3.433981308041041,
-            "wind_direction": 39.13644585492638,
-            "air_pressure": 1014.0,
-            "humidity": 85,
-            "visibility": 7.49777549113179,
-            "predictability": 77
-        },
-        {
-            ###########################################################################################################
-            ###########################################################################################################
-
-            "id": 4558482675073024,
-            "weather_state_name": "Light Rain",
-            "weather_state_abbr": "lr",
-            "wind_direction_compass": "NE",
-            "created": "2021-12-12T23:10:04.552064Z",
-            "applicable_date": "2021-12-15",
-            "min_temp": 17.985,
-            "max_temp": 23.485,
-            "the_temp": 24.865000000000002,
-            "wind_speed": 4.040530655730534,
-            "wind_direction": 54.84385329055433,
-            "air_pressure": 1012.5,
-            "humidity": 79,
-            "visibility": 8.235343096317505,
-            "predictability": 75
-        },
-        {
-            ###########################################################################################################
-            ###########################################################################################################
-
-            "id": 5130657010286592,
-            "weather_state_name": "Light Rain",
-            "weather_state_abbr": "lr",
-            "wind_direction_compass": "ENE",
-            "created": "2021-12-12T23:10:08.382452Z",
-            "applicable_date": "2021-12-16",
-            "min_temp": 17.759999999999998,
-            "max_temp": 24.555,
-            "the_temp": 24.73,
-            "wind_speed": 3.865125392144543,
-            "wind_direction": 71.76123252815815,
-            "air_pressure": 1012.5,
-            "humidity": 79,
-            "visibility": 9.087864372067127,
-            "predictability": 75
-        },
-        {
-
-            ###########################################################################################################
-            ###########################################################################################################
-
-            "id": 5646224884498432,
-            "weather_state_name": "Light Rain",
-            "weather_state_abbr": "lr",
-            "wind_direction_compass": "ENE",
-            "created": "2021-12-12T23:10:10.743220Z",
-            "applicable_date": "2021-12-17",
-            "min_temp": 18.055,
-            "max_temp": 24.545,
-            "the_temp": 24.7,
-            "wind_speed": 1.8567078262944403,
-            "wind_direction": 63.0,
-            "air_pressure": 1014.0,
-            "humidity": 82,
-            "visibility": 7.244566730295077,
-            "predictability": 75
+            "id": 802,
+            "main": "Clouds",
+            "description": "scattered clouds",
+            "icon": "03d"
         }
     ],
-
-    ###########################################################################################################
-    ###########################################################################################################
-
-    "time": "2021-12-12T18:57:28.275529-04:30",
-    "sun_rise": "2021-12-12T06:05:48.785555-04:30",
-    "sun_set": "2021-12-12T17:37:07.714937-04:30",
-    "timezone_name": "LMT",
-    "title": "Caracas",
-    "location_type": "City",
-    "woeid": 395269,
-    "latt_long": "10.496050,-66.898277",
-    "timezone": "America/Caracas"
+    "base": "stations",
+    "main": {
+        "temp": 296.31,
+        "feels_like": 296.74,
+        "temp_min": 292.82,
+        "temp_max": 296.31,
+        "pressure": 1013,
+        "humidity": 79
+    },
+    "visibility": 10000,
+    "wind": {
+        "speed": 0.89,
+        "deg": 346,
+        "gust": 2.24
+    },
+    "clouds": {
+        "all": 40
+    },
+    "dt": 1639416083,
+    "sys": {
+        "type": 2,
+        "id": 2004667,
+        "country": "VE",
+        "sunrise": 1639391785,
+        "sunset": 1639433246
+    },
+    "timezone": -14400,
+    "id": 3646738,
+    "name": "Caracas",
+    "cod": 200
 }
+
+INFO WEATHER MAIN VALUES
+https://openweathermap.org/weather-conditions
+
 */

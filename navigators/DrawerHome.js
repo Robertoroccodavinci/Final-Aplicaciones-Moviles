@@ -102,8 +102,11 @@ const Menu = ({navigation, name, img, props}) => {
                         <MaterialIcons name="logout" size={size} color={focused ? 'black' : 'grey'}/> )}
                      />
 
-        <Text style = {styles.about}> Proyecto Final App Moviles </Text>
-        <Text style = {styles.about}> @Copyright - 2021 | Ver. 1.0 </Text>
+        <View  style = {styles.about}>
+          <Text> Proyecto Final App Moviles </Text>
+          <Text> @Copyright - 2021 | Ver. 1.0 </Text>
+        </View>
+        
       </DrawerContentScrollView>
   )
 }
